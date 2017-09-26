@@ -1,6 +1,7 @@
 package com.dhh.rxlifecycle;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import rx.Observable;
 import rx.functions.Func1;
@@ -43,6 +44,7 @@ class LifecycleTransformer<T> implements Observable.Transformer<T, T> {
                 lifecycleObservable.skip(1), new Func2<ActivityEvent, ActivityEvent, Boolean>() {
                     @Override
                     public Boolean call(ActivityEvent activityEvent, ActivityEvent event) {
+                        Log.d("LifecycleTransformer", "event:" + event);
                         return activityEvent == event;
                     }
                 })
@@ -60,6 +62,7 @@ class LifecycleTransformer<T> implements Observable.Transformer<T, T> {
             new Func1<ActivityEvent, ActivityEvent>() {
                 @Override
                 public ActivityEvent call(ActivityEvent lastEvent) {
+                    Log.d("LifecycleTransformer", "lastEvent:" + lastEvent);
                     switch (lastEvent) {
                         case onCreate:
                             return ActivityEvent.onDestory;

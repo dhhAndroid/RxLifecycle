@@ -6,7 +6,7 @@ import rx.Observable;
  * Created by dhh on 2017/9/25.
  */
 
-interface LifecycleManager {
+public interface LifecycleManager {
 
     Observable<ActivityEvent> getLifecycle();
 

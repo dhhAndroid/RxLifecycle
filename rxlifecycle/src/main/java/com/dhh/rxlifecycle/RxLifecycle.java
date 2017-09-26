@@ -16,6 +16,14 @@ import java.lang.reflect.Field;
 public class RxLifecycle {
     private static final String FRAGMENT_TAG = "lifecycle_tag";
 
+    public static void bind(Object object) {
+        if (object instanceof View) {
+            with((View) object);
+        } else {
+            with(object);
+        }
+    }
+
     public static LifecycleManager with(Activity activity) {
         FragmentManager fm = activity.getFragmentManager();
         Fragment fragment = fm.findFragmentByTag(FRAGMENT_TAG);
