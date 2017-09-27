@@ -78,7 +78,9 @@
 
 ```
 ### 3. 为了简化和保险,可以忽略第二条,全部注入,第二条就当我在瞎BB......
-### use in activity or fragment: 仅仅需要在你原先的Observable事件流上用compose操作符加上如下代码:
+
+### use in activity or fragment: 
+### 仅仅需要在你原先的Observable事件流上用compose操作符加上如下代码:
 ```
 
  		Observable.timer(10, TimeUnit.SECONDS)

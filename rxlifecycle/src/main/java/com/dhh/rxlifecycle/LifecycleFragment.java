@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import rx.Observable;
-import rx.functions.Func1;
 import rx.subjects.BehaviorSubject;
 
 /**

@@ -21,14 +21,12 @@ public class LifecycleV4Fragment extends android.support.v4.app.Fragment impleme
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         lifecycleSubject.onNext(ActivityEvent.onCreate);
-        Log.d("LifecycleV4Fragment", "onCreate:");
         super.onCreate(savedInstanceState);
     }
 
     @Override
     public void onStart() {
         lifecycleSubject.onNext(ActivityEvent.onStart);
-        Log.d("LifecycleV4Fragment", "onStart:");
 
         super.onStart();
     }
@@ -36,27 +34,23 @@ public class LifecycleV4Fragment extends android.support.v4.app.Fragment impleme
     @Override
     public void onResume() {
         lifecycleSubject.onNext(ActivityEvent.onResume);
-        Log.d("LifecycleV4Fragment", "onResume:");
         super.onResume();
     }
 
     @Override
     public void onPause() {
-        Log.d("LifecycleV4Fragment", "onPause:");
         lifecycleSubject.onNext(ActivityEvent.onPause);
         super.onPause();
     }
 
     @Override
     public void onStop() {
-        Log.d("LifecycleV4Fragment", "onStop:");
         lifecycleSubject.onNext(ActivityEvent.onStop);
         super.onStop();
     }
 
     @Override
     public void onDestroy() {
-        Log.d("LifecycleV4Fragment", "onDestroy:");
         lifecycleSubject.onNext(ActivityEvent.onDestory);
         super.onDestroy();
     }
