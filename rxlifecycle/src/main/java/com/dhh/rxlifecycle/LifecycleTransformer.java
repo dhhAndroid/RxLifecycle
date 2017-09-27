@@ -6,21 +6,20 @@ import android.util.Log;
 import rx.Observable;
 import rx.functions.Func1;
 import rx.functions.Func2;
-import rx.subjects.BehaviorSubject;
 
 /**
  * Created by dhh on 2017/9/25.
  */
 
-class LifecycleTransformer<T> implements Observable.Transformer<T, T> {
+public class LifecycleTransformer<T> implements Observable.Transformer<T, T> {
     private Observable<ActivityEvent> lifecycleObservable;
     private ActivityEvent activityEvent;
 
-    LifecycleTransformer(BehaviorSubject<ActivityEvent> lifecycleObservable) {
+    LifecycleTransformer(Observable<ActivityEvent> lifecycleObservable) {
         this.lifecycleObservable = lifecycleObservable.share();
     }
 
-    LifecycleTransformer(BehaviorSubject<ActivityEvent> lifecycleObservable, ActivityEvent activityEvent) {
+    LifecycleTransformer(Observable<ActivityEvent> lifecycleObservable, ActivityEvent activityEvent) {
         this.lifecycleObservable = lifecycleObservable;
         this.activityEvent = activityEvent;
     }
@@ -75,7 +74,7 @@ class LifecycleTransformer<T> implements Observable.Transformer<T, T> {
                         case onStop:
                             return ActivityEvent.onDestory;
                         case onDestory:
-                            throw new IllegalStateException("Cannot bind to Activity lifecycle when outside of it.");
+                            throw new IllegalStateException("Cannot injectRxLifecycle to Activity lifecycle when outside of it.");
                         default:
                             throw new UnsupportedOperationException("Binding to " + lastEvent + " not yet implemented");
                     }

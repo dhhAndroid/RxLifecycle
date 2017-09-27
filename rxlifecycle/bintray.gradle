@@ -12,7 +12,7 @@ install {
         pom {
             project {
                 packaging 'aar'
-                name 'bind rxjava on Activity\'s lifecycle'     // 项目描述
+                name 'injectRxLifecycle rxjava on Activity\'s lifecycle'     // 项目描述
                 url siteUrl
                 licenses {
                     license {
@@ -59,7 +59,7 @@ javadoc {
         author true
         version true
         links "http://docs.oracle.com/javase/7/docs/api"
-        title 'bind rxjava on Activity\'s lifecycle'   // 文档标题
+        title 'injectRxLifecycle rxjava on Activity\'s lifecycle'   // 文档标题
     }
 }
 
