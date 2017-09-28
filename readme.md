@@ -1,7 +1,19 @@
 # RxLifecycle #
-
+## 原理解析:[戳我试试](http://blog.csdn.net/huiAndroid/article/details/78116228)
 ## RxLifecycle是一个轻量级,侵入性低的RxJava注销管理库.
-## how to use ##
+[ ![Download](https://api.bintray.com/packages/dhhandroid/maven/rxlifecycle/images/download.svg) ](https://bintray.com/dhhandroid/maven/rxlifecycle/_latestVersion)
+[ ![API](https://img.shields.io/badge/API-11%2B-blue.svg?style=flat-square) ](https://developer.android.com/about/versions/android-3.0.html)
+[ ![License](http://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square) ](http://www.apache.org/licenses/LICENSE-2.0)
+## feature
+ - 轻量:整个库只有24k.
+ - 入侵性低:不改变原来项目架构,继承体系,仅需OBservable事件流上加入本库即可.
+ - 适用于基于RxJava开发的任何三方库,如RxBus,RxBinding,以及本人的另外两个库,RxWebSocket(WebSocket自动重连库),RxProgressManager(网络层基于okhttp的上传下载进度监听库)等等.
+ - 目前版本仅适用于RxJava1.x,RxJava2.x正在开发中.
+## how to use 
+### gradle
+
+##  compile 'com.dhh:rxlifecycle:1.0'
+
 ### 如果你有一个BaseActivity,仅需在BaseActivity的onCreate方法里注入RxLifecycle: 
 ```
 
@@ -77,8 +89,7 @@
     }
 
 ```
-### 3. 为了简化和保险,可以忽略第二条,全部注入,第二条就当我在瞎BB......
-
+### 3. 为了简化和保险,可以忽略第二条,全部注入,第二条就当我在瞎BB,原因在博客里有讲解.
 ### use in activity or fragment: 
 ### 仅仅需要在你原先的Observable事件流上用compose操作符加上如下代码:
 ```

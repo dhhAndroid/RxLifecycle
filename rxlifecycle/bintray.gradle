@@ -3,8 +3,8 @@ apply plugin: 'com.jfrog.bintray'
 
 version = "1.0"      // 数据仓库依赖第三部分
 
-def siteUrl = 'https://github.com/dhhAndroid/RxWebSocket'
-def gitUrl = 'https://github.com/dhhAndroid/RxWebSocket.git'
+def siteUrl = 'https://github.com/dhhAndroid/RxLifecycle'
+def gitUrl = 'https://github.com/dhhAndroid/RxLifecycle.git'
 group = "com.dhh"       // 数据仓库依赖第一部分
 
 install {
@@ -12,7 +12,7 @@ install {
         pom {
             project {
                 packaging 'aar'
-                name 'injectRxLifecycle rxjava on Activity\'s lifecycle'     // 项目描述
+                name 'bind rxjava on Activity\'s lifecycle'     // 项目描述
                 url siteUrl
                 licenses {
                     license {
@@ -59,7 +59,7 @@ javadoc {
         author true
         version true
         links "http://docs.oracle.com/javase/7/docs/api"
-        title 'injectRxLifecycle rxjava on Activity\'s lifecycle'   // 文档标题
+        title 'bind rxjava on Activity lifecycle'   // 文档标题
     }
 }
 

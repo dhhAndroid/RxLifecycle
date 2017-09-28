@@ -12,12 +12,16 @@ import com.dhh.rxlifecycle.RxLifecycle;
 import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
+import rx.Subscriber;
+import rx.Subscription;
 import rx.functions.Action0;
+import rx.functions.Func1;
 
 public class MainActivity extends AppCompatActivity {
 
     private LifecycleManager mLifecycleManager;
     private MyTextView myTextView;
+    private Subscription mSubscription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +35,55 @@ public class MainActivity extends AppCompatActivity {
         Observable.just("34")
                 .compose(this.<String>bindToLifecycle())
                 .subscribe();
+
+        mSubscription = Observable.just(1).subscribe();
+        Observable.just(1, 23, 434, 5454, 343, 346, 56, 67, 4, -1)
+                //取前五个就注销
+                .take(5)
+                //直到条件满足,注销
+                .takeUntil(new Func1<Integer, Boolean>() {
+                    @Override
+                    public Boolean call(Integer integer) {
+                        return integer > 66666;
+                    }
+                })
+                //直到另外一个Observable发送数据就注销,本库主要用的这个操作符
+                .takeUntil(Observable.just(1))
+                .first(new Func1<Integer, Boolean>() {
+                    @Override
+                    public Boolean call(Integer integer) {
+                        return integer == 111;
+                    }
+                })
+                .map(new Func1<Integer, Integer>() {
+                    @Override
+                    public Integer call(Integer integer) {
+                        if (integer < 0) {
+                            //抛异常注销,这种用法在我另外一个库RxProgressManager使用到
+                            throw new RuntimeException("数据不能小于0");
+                        }
+                        return integer;
+                    }
+                })
+                .subscribe(new Subscriber<Integer>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(Integer integer) {
+                        if (integer == 666) {
+                            //当满足条件注销
+                            unsubscribe();
+                        }
+                    }
+                });
 
     }
 
@@ -83,6 +136,14 @@ public class MainActivity extends AppCompatActivity {
                 .subscribe();
         test();
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mSubscription != null && !mSubscription.isUnsubscribed()) {
+            mSubscription.unsubscribe();
+        }
     }
 
     private void test() {
