@@ -1,7 +1,6 @@
 package com.dhh.rxlifecycle;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import rx.Observable;
 import rx.functions.Func1;
@@ -32,7 +31,7 @@ public class LifecycleTransformer<T> implements Observable.Transformer<T, T> {
     @NonNull
     private Observable<?> getLifecycleObservable() {
         if (activityEvent != null) {
-            lifecycleObservable.takeFirst(new Func1<ActivityEvent, Boolean>() {
+            return lifecycleObservable.takeFirst(new Func1<ActivityEvent, Boolean>() {
                 @Override
                 public Boolean call(ActivityEvent event) {
                     return activityEvent == event;

@@ -1,6 +1,7 @@
 # RxLifecycle #
 ## 原理解析:[戳我试试](http://blog.csdn.net/huiAndroid/article/details/78116228)
 ## RxLifecycle是一个轻量级,侵入性低的RxJava注销管理库.
+[![](https://img.shields.io/badge/platform-android-brightgreen.svg)](https://developer.android.com/index.html) 
 [ ![Download](https://api.bintray.com/packages/dhhandroid/maven/rxlifecycle/images/download.svg) ](https://bintray.com/dhhandroid/maven/rxlifecycle/_latestVersion)
 [ ![API](https://img.shields.io/badge/API-11%2B-blue.svg?style=flat-square) ](https://developer.android.com/about/versions/android-3.0.html)
 [ ![License](http://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square) ](http://www.apache.org/licenses/LICENSE-2.0)
@@ -12,7 +13,7 @@
 ## how to use 
 ### gradle
 
-##  compile 'com.dhh:rxlifecycle:1.0'
+##  compile 'com.dhh:rxlifecycle:1.2'
 
 ### 如果你有一个BaseActivity,仅需在BaseActivity的onCreate方法里注入RxLifecycle: 
 ```
@@ -90,6 +91,7 @@
 
 ```
 ### 3. 为了简化和保险,可以忽略第二条,全部注入,第二条就当我在瞎BB,原因在博客里有讲解.
+## 如果你使用的是RxJava+Retrofit网络框架,恭喜你,有更好的选择方式,从Retrofit层自动注销RxJava:[RxLifecycle-Retrofit模块](rxlifecycle-retrofit/readme.md)
 ### use in activity or fragment: 
 ### 仅仅需要在你原先的Observable事件流上用compose操作符加上如下代码:
 ```

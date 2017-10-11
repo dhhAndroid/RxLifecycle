@@ -70,10 +70,10 @@ artifacts {
 
 // 生成jar包
 task releaseJar(type: Copy) {
-    from( 'build/intermediates/bundles/default')
-    into( '../jar')
+    from('build/intermediates/bundles/default')
+    into('../jar')
     include('classes.jar')
-    rename('classes.jar', 'rxlifecycle' + version + '.jar')
+    rename('classes.jar', 'rxlifecycle-retrofit' + version + '.jar')
 }
 
 Properties properties = new Properties()
@@ -84,7 +84,7 @@ bintray {
     configurations = ['archives']
     pkg {
         repo = "maven"
-        name = "rxlifecycle"             // 数据仓库依赖第二部分
+        name = "rxlifecycle-retrofit"             // 仓库名称
         websiteUrl = siteUrl
         vcsUrl = gitUrl
         licenses = ["Apache-2.0"]

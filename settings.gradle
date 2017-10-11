@@ -1,1 +1,1 @@
-include ':demo', ':rxlifecycle'
+include ':demo', ':rxlifecycle', ':rxlifecycle-retrofit'
