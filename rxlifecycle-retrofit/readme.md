@@ -6,7 +6,8 @@
 ### 对于RxJava+Retrofit的网络请求框架的优化版本
 ## Gradle
 ```
-
+	
+	compile 'com.dhh:rxlifecycle:1.2'
 	compile 'com.dhh:rxlifecycle-retrofit:1.3'
 
 ```

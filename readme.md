@@ -12,9 +12,11 @@
  - 目前版本仅适用于RxJava1.x,RxJava2.x正在开发中.
 ## how to use 
 ### gradle
+```
 
-##  compile 'com.dhh:rxlifecycle:1.2'
+	  compile 'com.dhh:rxlifecycle:1.2'
 
+```
 ### 如果你有一个BaseActivity,仅需在BaseActivity的onCreate方法里注入RxLifecycle: 
 ```
 
@@ -91,7 +93,7 @@
 
 ```
 ### 3. 为了简化和保险,可以忽略第二条,全部注入,第二条就当我在瞎BB,原因在博客里有讲解.
-## 如果你使用的是RxJava+Retrofit网络框架,恭喜你,有更好的选择方式,从Retrofit层自动注销RxJava:[RxLifecycle-Retrofit模块](rxlifecycle-retrofit/readme.md)
+## 如果你使用的是RxJava+Retrofit网络框架,恭喜你,有更好的选择方式,从Retrofit层自动注销RxJava:[RxLifecycle-Retrofit模块](https://github.com/dhhAndroid/RxLifecycle/tree/master/rxlifecycle-retrofit)
 ### use in activity or fragment: 
 ### 仅仅需要在你原先的Observable事件流上用compose操作符加上如下代码:
 ```
