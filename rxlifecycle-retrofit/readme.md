@@ -6,7 +6,7 @@
 ### 对于RxJava+Retrofit的网络请求框架的优化版本
 
 ### 效果图
-![效果图](image/RxLifecycle.gif)
+![效果图](https://github.com/dhhAndroid/RxLifecycle/blob/master/image/RxLifecycle.gif)
 ## Gradle(请以上面显示最新版本为准)
 ```
 	
