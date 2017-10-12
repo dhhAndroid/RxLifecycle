@@ -6,7 +6,6 @@
 ### 对于RxJava+Retrofit的网络请求框架的优化版本
 
 ### 效果图
-
 ![效果图](image/RxLifecycle.gif)
 ## Gradle(请以上面显示最新版本为准)
 ```
@@ -183,7 +182,7 @@
 ```
 ## 若编译时出现如下错误,请在gradle的defaultConfig节点下加入:multiDexEnabled true ,如下:
 
-![DexError](image/dexError.png)
+![DexError](https://github.com/dhhAndroid/RxLifecycle/blob/master/image/dexError.png)
 
 ```
 
