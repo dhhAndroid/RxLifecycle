@@ -1,11 +1,13 @@
-package com.dhh.demo;
+package com.dhh.rxlifecycle.retrofit;
+
+import android.support.annotation.Nullable;
 
 import com.dhh.rxlifecycle.LifecycleManager;
-import com.dhh.rxlifecycle.retrofit.RxJavaLifecycleCallAdapterFactory;
 
 import okhttp3.OkHttpClient;
+import retrofit2.CallAdapter;
+import retrofit2.Converter;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by dhh on 2017/10/11.
@@ -13,14 +15,17 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HttpHelper {
     private static HttpHelper instance;
-    public String baseUrl = "http://api.nohttp.net/";
+    public String baseUrl;
     private OkHttpClient client;
+    private CallAdapter.Factory callAdapterFactory;
+    private Converter.Factory converterFactory;
 
-    public HttpHelper() {
+    private HttpHelper() {
         client = new OkHttpClient.Builder()
                 //other config ...
 
                 .build();
+        callAdapterFactory = RxJavaLifecycleCallAdapterFactory.create();
     }
 
     public static HttpHelper getInstance() {
@@ -43,9 +48,10 @@ public class HttpHelper {
      * @return
      */
     public <T> T create(Class<T> service, String baseUrl) {
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl)
-                .addCallAdapterFactory(RxJavaLifecycleCallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(baseUrl)
+                .addCallAdapterFactory(callAdapterFactory)
+                .addConverterFactory(checkNotNull(converterFactory, "converterFactory == null"))
                 .client(client)
                 .build();
         return retrofit.create(service);
@@ -72,9 +78,10 @@ public class HttpHelper {
      * @return
      */
     public <T> T createWithLifecycleManager(Class<T> service, String baseUrl, LifecycleManager lifecycleManager) {
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl)
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(baseUrl)
                 .addCallAdapterFactory(RxJavaLifecycleCallAdapterFactory.createWithLifecycleManager(lifecycleManager))
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(checkNotNull(converterFactory, "converterFactory == null"))
                 .client(client)
                 .build();
         return retrofit.create(service);
@@ -93,6 +100,25 @@ public class HttpHelper {
     }
 
     public void setBaseUrl(String baseUrl) {
-        this.baseUrl = baseUrl;
+        this.baseUrl = checkNotNull(baseUrl, "baseUrl == null");
+    }
+
+    public OkHttpClient getClient() {
+        return client;
+    }
+
+    public void setClient(OkHttpClient client) {
+        this.client = checkNotNull(client, "client == null");
+    }
+
+    public void setConverterFactory(Converter.Factory converterFactory) {
+        this.converterFactory = checkNotNull(converterFactory, "converterFactory == null");
+    }
+
+    static <T> T checkNotNull(@Nullable T object, String message) {
+        if (object == null) {
+            throw new NullPointerException(message);
+        }
+        return object;
     }
 }

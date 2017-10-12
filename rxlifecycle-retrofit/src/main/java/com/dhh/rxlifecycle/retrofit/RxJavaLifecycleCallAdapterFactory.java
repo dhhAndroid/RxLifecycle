@@ -21,23 +21,40 @@ import rx.schedulers.Schedulers;
 
 public class RxJavaLifecycleCallAdapterFactory extends CallAdapter.Factory {
 
-    private CallAdapter.Factory adapterFactory;
+    private static CallAdapter.Factory adapterFactory;
     private LifecycleManager lifecycleManager;
 
     private RxJavaLifecycleCallAdapterFactory(LifecycleManager lifecycleManager) {
         this.lifecycleManager = lifecycleManager;
-        adapterFactory = RxLifecycleRetrofit.getFactory();
         if (adapterFactory == null) {
+            try {
+                Class.forName("retrofit2.adapter.rxjava.RxJavaCallAdapterFactory");
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException("Must be dependency RxJavaCallAdapterFactory !");
+            }
             adapterFactory = RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io());
         }
     }
 
     public static CallAdapter.Factory create() {
-        CallAdapter.Factory factory = RxLifecycleRetrofit.getFactory();
-        if (factory == null) {
-            factory = RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io());
+        if (adapterFactory == null) {
+            try {
+                Class.forName("retrofit2.adapter.rxjava.RxJavaCallAdapterFactory");
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException("Must be dependency RxJavaCallAdapterFactory !");
+            }
+            adapterFactory = RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io());
         }
-        return factory;
+        return adapterFactory;
+    }
+
+    /**
+     * 确保你注入的factory内部是RxJavaCallAdapterFactory
+     *
+     * @param factory
+     */
+    public static void injectCallAdapterFactory(CallAdapter.Factory factory) {
+        RxJavaLifecycleCallAdapterFactory.adapterFactory = factory;
     }
 
     public static CallAdapter.Factory createWithLifecycleManager(LifecycleManager lifecycleManager) {

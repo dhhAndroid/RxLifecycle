@@ -3,18 +3,27 @@ package com.dhh.demo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.dhh.rxlifecycle.ActivityEvent;
 import com.dhh.rxlifecycle.LifecycleManager;
 import com.dhh.rxlifecycle.LifecycleTransformer;
 import com.dhh.rxlifecycle.RxLifecycle;
+import com.dhh.rxlifecycle.retrofit.HttpHelper;
 import com.dhh.websocket.RxWebSocketUtil;
+import com.jakewharton.rxbinding.view.RxView;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.OkHttpClient;
+import okhttp3.ResponseBody;
+import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
 import rx.Subscriber;
 import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.functions.Func1;
@@ -39,6 +48,78 @@ public class MainActivity extends AppCompatActivity {
                 .subscribe();
 
         mSubscription = Observable.just(1).subscribe();
+
+
+        //RxLifecycle-Retrofit 模块代码demo
+        HttpHelper.getInstance().setBaseUrl("https://github.com/dhhAndroid/");
+        HttpHelper.getInstance().setClient(new OkHttpClient());
+        HttpHelper.getInstance().setConverterFactory(GsonConverterFactory.create());
+        final Api api = HttpHelper.getInstance().createWithLifecycleManager(Api.class, RxLifecycle.with(this));
+        final Button button = (Button) findViewById(R.id.button);
+        RxView.clicks(button)
+                .flatMap(new Func1<Void, Observable<Long>>() {
+                    @Override
+                    public Observable<Long> call(Void aVoid) {
+                        return Observable.interval(0, 1, TimeUnit.SECONDS, AndroidSchedulers.mainThread());
+                    }
+                })
+                .take(6)
+                .map(new Func1<Long, Long>() {
+                    @Override
+                    public Long call(Long aLong) {
+                        return 5 - aLong;
+                    }
+                })
+                .takeFirst(new Func1<Long, Boolean>() {
+                    @Override
+                    public Boolean call(Long aLong) {
+                        button.setText(aLong + "秒后开始网络请求");
+                        return aLong == 0;
+                    }
+                })
+                .flatMap(new Func1<Long, Observable<ResponseBody>>() {
+                    @Override
+                    public Observable<ResponseBody> call(Long aLong) {
+                        return api.get("https://github.com/dhhAndroid/RxLifecycle");
+                    }
+                })
+                .map(new Func1<ResponseBody, String>() {
+                    @Override
+                    public String call(ResponseBody body) {
+                        try {
+                            return body.string();
+                        } catch (IOException e) {
+                            return "解析错误 !";
+                        }
+                    }
+                })
+                .doOnUnsubscribe(new Action0() {
+                    @Override
+                    public void call() {
+                        Toast.makeText(MainActivity.this, "网络请求取消/完成了 !", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<String>() {
+                    @Override
+                    public void call(String s) {
+                        Log.d("MainActivity", s);
+                        button.setText("网络请求完成!");
+                        Toast.makeText(MainActivity.this, s, Toast.LENGTH_SHORT).show();
+                    }
+                });
+        api.get("https://github.com/dhhAndroid/RxLifecycle")
+                .compose(RxLifecycle.with(this).<ResponseBody>bindOnDestroy())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<ResponseBody>() {
+                    @Override
+                    public void call(ResponseBody body) {
+
+                    }
+                });
+    }
+
+    private void unSubscribeTest() {
         Observable.just(1, 23, 434, 5454, 343, 346, 56, 67, 4, -1)
                 //取前五个就注销
                 .take(5)

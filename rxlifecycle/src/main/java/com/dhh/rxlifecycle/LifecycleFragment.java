@@ -14,7 +14,7 @@ import rx.subjects.BehaviorSubject;
 public class LifecycleFragment extends Fragment implements LifecycleManager {
     private final BehaviorSubject<ActivityEvent> lifecycleSubject;
 
-    public LifecycleFragment() {
+    LifecycleFragment() {
         lifecycleSubject = BehaviorSubject.create();
     }
 

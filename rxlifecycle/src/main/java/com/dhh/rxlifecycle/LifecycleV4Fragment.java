@@ -13,7 +13,7 @@ import rx.subjects.BehaviorSubject;
 public class LifecycleV4Fragment extends android.support.v4.app.Fragment implements LifecycleManager {
     private final BehaviorSubject<ActivityEvent> lifecycleSubject;
 
-    public LifecycleV4Fragment() {
+    LifecycleV4Fragment() {
         lifecycleSubject = BehaviorSubject.create();
     }
 

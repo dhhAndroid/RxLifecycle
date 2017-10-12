@@ -17,6 +17,9 @@ import java.lang.reflect.Field;
 public class RxLifecycle {
     private static final String FRAGMENT_TAG = "lifecycle_tag";
 
+    private RxLifecycle() {
+    }
+
     /**
      * @param context ensure context can be cast {@link Activity}
      */
