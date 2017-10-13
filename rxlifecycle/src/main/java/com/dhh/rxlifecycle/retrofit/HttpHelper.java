@@ -21,6 +21,11 @@ public class HttpHelper {
     private Converter.Factory converterFactory;
 
     private HttpHelper() {
+        try {
+            Class.forName("okhttp3.OkHttpClient");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("Must be dependency retrofit2 !");
+        }
         client = new OkHttpClient.Builder()
                 //other config ...
 

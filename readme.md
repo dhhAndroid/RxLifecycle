@@ -3,7 +3,7 @@
 ## RxLifecycle是一个轻量级,侵入性低的RxJava注销管理库.
 [![](https://img.shields.io/badge/platform-android-brightgreen.svg)](https://developer.android.com/index.html) 
 [ ![Download](https://api.bintray.com/packages/dhhandroid/maven/rxlifecycle/images/download.svg) ](https://bintray.com/dhhandroid/maven/rxlifecycle/_latestVersion)
-[ ![API](https://img.shields.io/badge/API-11%2B-blue.svg?style=flat-square) ](https://developer.android.com/about/versions/android-3.0.html)
+[ ![API](https://img.shields.io/badge/API-14%2B-blue.svg?style=flat-square) ](https://developer.android.com/about/versions/android-4.0.html)
 [ ![License](http://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square) ](http://www.apache.org/licenses/LICENSE-2.0)
 ## feature
  - 轻量:整个库只有24k.
@@ -18,7 +18,7 @@
 ### gradle(请以上面显示最新版本为准)
 ```
 
-	  compile 'com.dhh:rxlifecycle:1.4'
+	  compile 'com.dhh:rxlifecycle:1.5'
 
 ```
 ### 如果你有一个BaseActivity,仅需在BaseActivity的onCreate方法里注入RxLifecycle: 
@@ -64,16 +64,9 @@
 		    @Override
 		    public void onCreate() {
 		        super.onCreate();
-		        registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
-		            @Override
-		            public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-		                RxLifecycle.injectRxLifecycle(activity);
-		            }
-					//other mothods
-		        });
+		        RxLifecycle.injectRxLifecycle(this);
 		    }
 		}
-
 
 ```
 ## **注意:** 

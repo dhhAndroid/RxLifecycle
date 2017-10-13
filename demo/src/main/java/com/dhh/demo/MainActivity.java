@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        RxLifecycle.injectRxLifecycle(this);
         setContentView(R.layout.activity_main);
         initView();
         mLifecycleManager = RxLifecycle.with(this);

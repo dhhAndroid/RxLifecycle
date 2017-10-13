@@ -1,6 +1,7 @@
 package com.dhh.rxlifecycle;
 
 import android.app.Activity;
+import android.app.Application;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
@@ -14,17 +15,45 @@ import java.lang.reflect.Field;
  * Created by dhh on 2017/9/25.
  */
 
-public class RxLifecycle {
+public final class RxLifecycle {
     private static final String FRAGMENT_TAG = "lifecycle_tag";
 
     private RxLifecycle() {
+        throw new RuntimeException("No instances");
     }
 
     /**
-     * @param context ensure context can be cast {@link Activity}
+     * use in {@link Activity} onCreate
+     * <pre> {@code
+     * public class BaseActivity extends AppCompatActivity {
+     *      protected void onCreate(Bundle savedInstanceState) {
+     *          super.onCreate(savedInstanceState);
+     *          RxLifecycle.injectRxLifecycle(this);
+     *      }
+     * }
+     * }</pre>
+     *
+     * @param activity
      */
-    public static void injectRxLifecycle(Context context) {
-        with(context);
+    public static void injectRxLifecycle(Activity activity) {
+        with(activity);
+    }
+
+    /**
+     * use in {@link Application} oncreate
+     * <pre> {@code
+     * public class RxLifecycleAPP extends Application {
+     *      public void onCreate() {
+     *          super.onCreate();
+     *          RxLifecycle.injectRxLifecycle(this);
+     *      }
+     * }
+     * }</pre>
+     *
+     * @param application
+     */
+    public static void injectRxLifecycle(Application application) {
+        application.registerActivityLifecycleCallbacks(new ActivityRxLifecycleCallbacks());
     }
 
     public static LifecycleManager with(Activity activity) {

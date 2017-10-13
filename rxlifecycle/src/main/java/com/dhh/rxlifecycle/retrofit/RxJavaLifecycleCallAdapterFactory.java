@@ -26,6 +26,11 @@ public class RxJavaLifecycleCallAdapterFactory extends CallAdapter.Factory {
 
     private RxJavaLifecycleCallAdapterFactory(LifecycleManager lifecycleManager) {
         this.lifecycleManager = lifecycleManager;
+        try {
+            Class.forName("retrofit2.Retrofit");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("Must be dependency retrofit2 !");
+        }
         if (adapterFactory == null) {
             try {
                 Class.forName("retrofit2.adapter.rxjava.RxJavaCallAdapterFactory");
@@ -37,6 +42,11 @@ public class RxJavaLifecycleCallAdapterFactory extends CallAdapter.Factory {
     }
 
     public static CallAdapter.Factory create() {
+        try {
+            Class.forName("retrofit2.Retrofit");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("Must be dependency retrofit2 !");
+        }
         if (adapterFactory == null) {
             try {
                 Class.forName("retrofit2.adapter.rxjava.RxJavaCallAdapterFactory");
