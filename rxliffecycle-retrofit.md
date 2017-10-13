@@ -1,20 +1,14 @@
 ## RxLifecycle-Retrofit
-[![](https://img.shields.io/badge/platform-android-brightgreen.svg)](https://developer.android.com/index.html) 
-[ ![Download](https://api.bintray.com/packages/dhhandroid/maven/rxlifecycle-retrofit/images/download.svg) ](https://bintray.com/dhhandroid/maven/rxlifecycle-retrofit/_latestVersion)
-[ ![API](https://img.shields.io/badge/API-11%2B-blue.svg?style=flat-square) ](https://developer.android.com/about/versions/android-3.0.html)
-[ ![License](http://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square) ](http://www.apache.org/licenses/LICENSE-2.0)
-### 对于RxJava+Retrofit的网络请求框架的优化版本
-
-### 效果图
-![效果图](https://github.com/dhhAndroid/RxLifecycle/blob/master/image/RxLifecycle.gif)
-## Gradle(请以上面显示最新版本为准)
-```
-	
-	compile 'com.dhh:rxlifecycle:1.4'
-	compile 'com.dhh:rxlifecycle-retrofit:1.4'
-
-```
 ### 首先说明这个方式的实现原理是:通过自定义CallAdapterFactory,将Observable与activity绑定.每一个Activity绑定一个retrofit客户端,在每次创建service接口的时候,都要重新初始化Retrofit客户端,禁止复用.
+### 这个模块只有两个类:
+ - HttpHelper : 示例工具类,创建和界面绑定的service接口.可以直使用.
+ - RxJavaLifecycleCallAdapterFactory : RxJavaCallAdapterFactory扩展类,将接口请求绑定到对应Activity的onDestroy.
+### gradle依赖不变:
+``` 
+
+		compile 'com.dhh:rxlifecycle:1.5'
+
+```
 ## How to use
 
 ### 一. 如果你自己没有自定义RxJavaCallAdapterFactory,直接忽略这条操作.若你已经自定义了一个XXXRxJavaCallAdapterFactory(不是Retrofit自带的那个),又想使用本库提供的RxJavaLifecycleCallAdapterFactory,那么你需要这么做:
@@ -180,38 +174,5 @@
                 });
 
 ```
-## 若编译时出现如下错误,请在gradle的defaultConfig节点下加入:multiDexEnabled true ,如下:
-
-![DexError](https://github.com/dhhAndroid/RxLifecycle/blob/master/image/dexError.png)
-
-```
-
-	android {
-		//other...
-
-	    defaultConfig {	     	
-			//other...
-
-	        multiDexEnabled true
-	    }
-	}
-
-```
-
-## 详情请查看demo.
+# 详情请查看demo.
 # 从此就可以对 使用RxJava+Retrofit 导致的内存泄漏说 ( ^_^ )/~~拜拜 !
-## License
-```
-
-   Licensed under the Apache License, Version 2.0 (the "License");
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
-```

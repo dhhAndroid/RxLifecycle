@@ -52,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         //RxLifecycle-Retrofit 模块代码demo
+
+        //初始化HttpHelper
         HttpHelper.getInstance().setBaseUrl("https://github.com/dhhAndroid/");
         HttpHelper.getInstance().setClient(new OkHttpClient());
         HttpHelper.getInstance().setConverterFactory(GsonConverterFactory.create());

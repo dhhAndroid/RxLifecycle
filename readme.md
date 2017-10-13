@@ -9,7 +9,7 @@
  - 轻量:整个库只有24k.
  - 入侵性低:不改变原来项目架构,继承体系,仅需OBservable事件流上加入本库即可.
  - 适用于基于RxJava开发的任何三方库,如RxBus,RxBinding,以及本人的另外两个库,[RxWebSocket(WebSocket自动重连库)](https://github.com/dhhAndroid/RxWebSocket),[RxProgressManager(网络层基于okhttp的上传下载进度监听库)](https://github.com/dhhAndroid/RxProgressManager) 等等.
- - 对于RxJava+Retrofit请求框架,有[RxLifecycle-Retrofit拓展模块](https://github.com/dhhAndroid/RxLifecycle/tree/master/rxlifecycle-retrofit),从retrofit层自动注销网络情况(统一绑定到Activity销毁时取消所有正在进行的网络请求).
+ - 对于RxJava+Retrofit请求框架,有[RxLifecycle-Retrofit拓展模块](https://github.com/dhhAndroid/RxLifecycle/blob/master/rxliffecycle-retrofit.md),从retrofit层自动注销网络情况(统一绑定到Activity销毁时取消所有正在进行的网络请求).
  - 目前版本仅适用于RxJava1.x,RxJava2.x正在开发中.
 
 ### 效果图
@@ -90,7 +90,7 @@
 
 ```
 ### 3. 为了简化和保险,可以忽略第二条,全部注入,第二条就当我在瞎BB,原因在博客里有讲解.
-## 如果你使用的是RxJava+Retrofit网络框架,有更好的选择方式,从Retrofit层自动注销RxJava:[RxLifecycle-Retrofit模块](https://github.com/dhhAndroid/RxLifecycle/tree/master/rxlifecycle-retrofit)
+## 如果你使用的是RxJava+Retrofit网络框架,有更好的选择方式,项目里提供了Retrofit模块,从Retrofit层自动注销RxJava:[RxLifecycle-Retrofit模块](https://github.com/dhhAndroid/RxLifecycle/blob/master/rxliffecycle-retrofit.md)
 ### use in activity or fragment: 
 ### 仅仅需要在你原先的Observable事件流上用compose操作符加上如下代码:
 ```
