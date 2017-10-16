@@ -1,11 +1,10 @@
-package com.dhh.rxlifecycle;
+package com.dhh.rxlifecycle2;
 
 import android.app.Activity;
 import android.app.Application;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -17,7 +16,7 @@ import java.lang.reflect.Field;
  */
 
 public final class RxLifecycle {
-    private static final String FRAGMENT_TAG = "lifecycle_tag";
+    private static final String FRAGMENT_TAG = "lifecycle2_tag";
 
     private RxLifecycle() {
         throw new RuntimeException("No instances");
@@ -99,9 +98,6 @@ public final class RxLifecycle {
         }
         if (context instanceof Activity) {
             return with((Activity) context);
-        }
-        if (context instanceof ContextWrapper) {
-            return with(((ContextWrapper) context).getBaseContext());
         }
         throw new ClassCastException(context.getClass().getSimpleName() + " can\'t cast Activity !");
     }

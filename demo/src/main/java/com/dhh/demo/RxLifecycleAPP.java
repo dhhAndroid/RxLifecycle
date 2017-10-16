@@ -17,6 +17,7 @@ public class RxLifecycleAPP extends Application {
     public void onCreate() {
         super.onCreate();
         RxLifecycle.injectRxLifecycle(this);
+        com.dhh.rxlifecycle2.RxLifecycle.injectRxLifecycle(this);
 
         //如果你有一个自定义的XXXRxJavaCallAdapterFactory,这样注入
         // 假如这是你自己定义的XXXRxJavaCallAdapterFactory

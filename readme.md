@@ -110,7 +110,7 @@
                 .subscribe();
 ```
 ### use in your View ###
-### 如果你在自定义view的时候里面使用的RxJava,以及View内部有retrofit+RxJava的网络访问,已经RxJava操作的耗时数据转换,同样支持一行代码管理RxJava自动注销,确保你的view不是继承自AppCompatXXXView,暂不支持.用法和在activity和fragment里一样: ###
+### 如果你在自定义view的时候里面使用的RxJava,以及View内部有retrofit+RxJava的网络访问,以及RxJava操作的耗时数据转换,同样支持一行代码管理RxJava自动注销,用法和在activity和fragment里一样: ###
 ```
 
 		public class MyView extends View {
@@ -162,6 +162,9 @@
     }
 
 ```
+#### 参考项目:
+- [RxLifecycle](https://github.com/trello/RxLifecycle)
+- [Glide](https://github.com/bumptech/glide)
 ## License
 ```
 

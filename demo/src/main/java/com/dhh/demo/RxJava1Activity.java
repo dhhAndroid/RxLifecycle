@@ -28,7 +28,7 @@ import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.functions.Func1;
 
-public class MainActivity extends AppCompatActivity {
+public class RxJava1Activity extends AppCompatActivity {
 
     private LifecycleManager mLifecycleManager;
     private MyTextView myTextView;
@@ -37,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        startActivity(new Intent(this,RxJava2Activity.class));
+//        finish();
         RxLifecycle.injectRxLifecycle(this);
         setContentView(R.layout.activity_main);
         initView();
@@ -83,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                 .flatMap(new Func1<Long, Observable<ResponseBody>>() {
                     @Override
                     public Observable<ResponseBody> call(Long aLong) {
-                        return api.get("https://github.com/dhhAndroid/RxLifecycle");
+                        return api.RxJava1get("https://github.com/dhhAndroid/RxLifecycle");
                     }
                 })
                 .map(new Func1<ResponseBody, String>() {
@@ -99,19 +101,19 @@ public class MainActivity extends AppCompatActivity {
                 .doOnUnsubscribe(new Action0() {
                     @Override
                     public void call() {
-                        Toast.makeText(MainActivity.this, "网络请求取消/完成了 !", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RxJava1Activity.this, "网络请求取消/完成了 !", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<String>() {
                     @Override
                     public void call(String s) {
-                        Log.d("MainActivity", s);
+                        Log.d("RxJava1Activity", s);
                         button.setText("网络请求完成!");
-                        Toast.makeText(MainActivity.this, s, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RxJava1Activity.this, s, Toast.LENGTH_SHORT).show();
                     }
                 });
-        api.get("https://github.com/dhhAndroid/RxLifecycle")
+        api.RxJava1get("https://github.com/dhhAndroid/RxLifecycle")
                 .compose(RxLifecycle.with(this).<ResponseBody>bindOnDestroy())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<ResponseBody>() {
@@ -245,13 +247,13 @@ public class MainActivity extends AppCompatActivity {
                 .doOnSubscribe(new Action0() {
                     @Override
                     public void call() {
-                        Log.d("MainActivity", "注册");
+                        Log.d("RxJava1Activity", "注册");
                     }
                 })
                 .doOnUnsubscribe(new Action0() {
                     @Override
                     public void call() {
-                        Log.d("MainActivity", "注销");
+                        Log.d("RxJava1Activity", "注销");
                     }
                 })
                 .compose(RxLifecycle.with(this).<Long>bindOnDestroy())

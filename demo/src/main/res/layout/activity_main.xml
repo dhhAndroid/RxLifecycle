@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.dhh.demo.MainActivity">
+    tools:context="com.dhh.demo.RxJava1Activity">
 
     <com.dhh.demo.MyTextView
         android:id="@+id/myTextView"

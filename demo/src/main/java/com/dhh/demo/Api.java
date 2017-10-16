@@ -11,5 +11,8 @@ import rx.Observable;
 
 public interface Api {
     @GET
-    Observable<ResponseBody> get(@Url String url);
+    Observable<ResponseBody> RxJava1get(@Url String url);
+
+    @GET
+    io.reactivex.Observable<ResponseBody> RxJava2get(@Url String url);
 }
