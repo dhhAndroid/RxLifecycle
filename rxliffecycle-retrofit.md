@@ -5,8 +5,10 @@
  - RxJavaLifecycleCallAdapterFactory : RxJavaCallAdapterFactory扩展类,将接口请求绑定到对应Activity的onDestroy.
 ### gradle依赖不变:
 ``` 
-
+		//RxJava1
 		compile 'com.dhh:rxlifecycle:1.5'
+		//RxJava2
+		compile 'com.dhh:rxlifecycle2:1.5'
 
 ```
 ## How to use
@@ -14,8 +16,10 @@
 ### 一. 如果你自己没有自定义RxJavaCallAdapterFactory,直接忽略这条操作.若你已经自定义了一个XXXRxJavaCallAdapterFactory(不是Retrofit自带的那个),又想使用本库提供的RxJavaLifecycleCallAdapterFactory,那么你需要这么做:
 ###在你项目的Application的onCreate方法中进行初始化:
 ```
-		
+		//RxJava1
         RxJavaLifecycleCallAdapterFactory.injectCallAdapterFactory(yourFactory);
+		//RxJava2
+        RxJava2LifecycleCallAdapterFactory.injectCallAdapterFactory(yourFactory);
 
 
 ```
@@ -174,5 +178,8 @@
                 });
 
 ```
+### HttpHelper调用API完全一样,只是RxJavaCallAdapter不一样.
+# 详情请查看demo.
+# 详情请查看demo.
 # 详情请查看demo.
 # 从此就可以对 使用RxJava+Retrofit 导致的内存泄漏说 ( ^_^ )/~~拜拜 !

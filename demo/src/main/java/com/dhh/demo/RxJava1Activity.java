@@ -37,10 +37,10 @@ public class RxJava1Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 //        startActivity(new Intent(this,RxJava2Activity.class));
 //        finish();
         RxLifecycle.injectRxLifecycle(this);
-        setContentView(R.layout.activity_main);
         initView();
         mLifecycleManager = RxLifecycle.with(this);
         Observable.just(1)

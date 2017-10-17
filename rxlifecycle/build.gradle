@@ -33,4 +33,4 @@ dependencies {
     provided 'com.squareup.retrofit2:adapter-rxjava:2.3.0'
 }
 
-apply from: 'bintray.gradle'
+//apply from: 'bintray.gradle'
