@@ -14,7 +14,7 @@ import io.reactivex.subjects.BehaviorSubject;
 public class LifecycleV4Fragment extends android.support.v4.app.Fragment implements LifecycleManager {
     private final BehaviorSubject<ActivityEvent> lifecycleSubject;
 
-    LifecycleV4Fragment() {
+    public LifecycleV4Fragment() {
         lifecycleSubject = BehaviorSubject.create();
     }
 

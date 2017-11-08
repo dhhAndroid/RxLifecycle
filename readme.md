@@ -19,9 +19,9 @@
 ### gradle(请以上面显示最新版本为准,根据自己使用的RxJava版本选择一个版本)
 ```
 	  //RxJava1版本
-	  compile 'com.dhh:rxlifecycle:1.5'
+	  compile 'com.dhh:rxlifecycle:1.6'
 	  //RxJava2版本
-	  compile 'com.dhh:rxlifecycle2:1.5'
+	  compile 'com.dhh:rxlifecycle2:1.6'
 
 ```
 ## RxJava2和RxJava1 的使用方法完全一样,以RxJava1库为例.

@@ -1,4 +1,6 @@
 
+### 1.6
+ - fix:修复某种情况下导致LifecycleFragment获取失败
 
 
 ### 1.5

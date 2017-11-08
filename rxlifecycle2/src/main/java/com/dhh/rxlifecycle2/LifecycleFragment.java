@@ -15,7 +15,7 @@ import io.reactivex.subjects.BehaviorSubject;
 public class LifecycleFragment extends Fragment implements LifecycleManager {
     private final BehaviorSubject<ActivityEvent> lifecycleSubject;
 
-    LifecycleFragment() {
+    public LifecycleFragment() {
         lifecycleSubject = BehaviorSubject.create();
     }
 
