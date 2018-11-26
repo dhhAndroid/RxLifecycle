@@ -1,4 +1,5 @@
 # RxLifecycle #
+# 【停止维护，请查看新项目[RxLife](https://github.com/dhhAndroid/RxLife)】 #
 ## 原理解析:[戳我试试](http://blog.csdn.net/huiAndroid/article/details/78116228)
 ## RxLifecycle是一个轻量级,侵入性低的RxJava注销管理库.
 [![](https://img.shields.io/badge/platform-android-brightgreen.svg)](https://developer.android.com/index.html) 
